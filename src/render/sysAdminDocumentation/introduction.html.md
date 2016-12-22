@@ -1,8 +1,9 @@
 ---
 title: "Introduction"
+icon: "lightbulb-o"
 layout: "sysAdminDocumentationTemp"
 isSysAdminDocumentation: true
-index: 1
+menuIndex: 1
 ---
 
 # Introduction

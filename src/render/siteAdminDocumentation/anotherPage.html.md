@@ -1,5 +1,6 @@
 ---
 title: "Another page"
+icon: "pied-piper"
 layout: "siteAdminDocumentationTemp"
 isSiteAdminDocumentation: true
 menuIndex: 2

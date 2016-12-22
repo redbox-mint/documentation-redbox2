@@ -1,8 +1,9 @@
 ---
 title: "Introduction"
+icon: "lightbulb-o"
 layout: "userDocumentationTemp"
 isUserDocumentation: true
-index: 3
+menuIndex: 1
 ---
 
 # Introduction

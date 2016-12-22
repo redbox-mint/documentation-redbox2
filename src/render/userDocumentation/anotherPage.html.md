@@ -1,5 +1,6 @@
 ---
 title: "Another page"
+icon: "pied-piper"
 layout: "userDocumentationTemp"
 isUserDocumentation: true
 menuIndex: 2
