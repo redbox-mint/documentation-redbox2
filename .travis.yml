@@ -1,0 +1,8 @@
+language: node_js
+before_script:
+- ./prebuild.sh
+script:
+- docpad deploy-ghpages --env static
+env:
+  global:
+  - GH_REPO="redbox-mint/website-reboxresearchdata"
