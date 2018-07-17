@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+    <title>Configuring web forms | ReDBox Documentation</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="../assets/plugins/elegant_font/css/style.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../assets/css/styles.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="body-green">
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="../index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">ReDBox </span><span class="text-bold">Docs</span>
+                        </a>
+                    </h1>
+                </div><!--//branding-->
+                <ol class="breadcrumb">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../start.html">Quick start</a></li>
+                    <li><a href="../userDocumentation/introduction.html">For users</a></li>
+                    <li><a href="../siteAdminDocumentation/introduction.html">For site admins</a></li>
+                    <li><li class="active">For sys admins</li></li>
+
+                </ol>
+            </div><!--//container-->
+        </header><!--//header-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon fab fa-aviato"></i> Configuring web forms</h1>
+                    <div class="meta"><i class="fa fa-clock-o"></i> Last updated: <b>Can be templated TO-DO</b></div>
+                </div><!--//doc-header-->
+                <div class="doc-body">
+                    <div class="doc-content">
+                        <div class="content-inner">
+
+                            <h1 id="configuring-web-forms">Configuring web forms</h1>
+<h2 id="introduction">Introduction</h2>
+<p>ReDBox has a flexible and configurable framework that allows you to capture as metadata for a variety different purposes such as data management plans, provisioned workspaces and data collections. Metadata is stored in the <a href="https://json-ld.org/">JSON-LD</a> format and has a very loose schema to support this flexibility.</p>
+<p>For each type of metadata record stored, it is also possible to configure a workflow that the record may pass through to map to the business processes within your organisation.</p>
+<p>There is also a configurable form system that allows you to design a form to meet your needs without having the need to understand code. It is possible to attach different form structures to each workflow stage to suit the requirements for the user of the form.</p>
+<h2 id="record-type-configuration">Record Type Configuration</h2>
+<p>Record Types are configured in the <code>config/recordtype.js</code> file.</p>
+<p>The record type configuration defines the record type (e.g. a research data managment plan record) and what fields in the record should be displayed on the search interface for the purposes of filtering and faceting.</p>
+<p>Record&#39;s are configured via the config/workflow.js file and specifies the workflow stages a record can transition through and the roles that are permitted to view and edit a record for each workflow stage.</p>
+<pre><code>&lt;record-type&gt;
+|
+|- search-filters []
+    |- name
+    |- title
+    |- type
+    |- typeLabel
+</code></pre><p>Where &lt;&gt; are property labels that are variables.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Required</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; record-type &gt;</td>
+<td>The label of record type</td>
+<td>Yes</td>
+<td>rdmp</td>
+</tr>
+<tr>
+<td>name</td>
+<td>The name of the Solr index field to facet on. For facet type fields, this is usually the name you&#39;ve configured in your form configuration. To allow for inexact matching for filter search boxes, append <code>text_</code> to the beginning of the name</td>
+<td>Yes</td>
+<td>text_title</td>
+</tr>
+<tr>
+<td>title</td>
+<td>The heading label to display in the facets section. Can read text from the language file</td>
+<td>Yes</td>
+<td>search-refine-description</td>
+</tr>
+<tr>
+<td>type</td>
+<td>The type of facet. Fixed for search box filters, facet for facet counts</td>
+<td>Yes</td>
+<td>facet</td>
+</tr>
+<tr>
+<td>typeLabel</td>
+<td>The label to show above the search box filter. Can read text from the language file. Set to null for facet count fields</td>
+<td>Yes</td>
+<td>search-refine-contains</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example">Example</h4>
+<pre><code>&quot;rdmp&quot;: {
+  searchFilters: [
+    {
+      name: &quot;text_title&quot;,
+      title: &quot;search-refine-title&quot;,
+      type: &quot;exact&quot;,
+      typeLabel: &quot;search-refine-contains&quot;
+    },
+    {
+      name: &quot;text_description&quot;,
+      title: &quot;search-refine-description&quot;,
+      type: &quot;exact&quot;,
+      typeLabel: &quot;Can read text from the language file&quot;
+    },
+    {
+      name: &quot;grant_number_name&quot;,
+      title: &quot;search-refine-grant_number_name&quot;,
+      type: &quot;facet&quot;,
+      typeLabel: null,
+      alwaysActive: true
+    },
+    {
+      name: &quot;finalKeywords&quot;,
+      title: &quot;search-refine-keywords&quot;,
+      type: &quot;facet&quot;,
+      typeLabel: null,
+      alwaysActive: true
+    },
+    {
+      name: &quot;workflow_stageLabel&quot;,
+      title: &quot;search-refine-workflow_stageLabel&quot;,
+      type: &quot;facet&quot;,
+      typeLabel: null,
+      alwaysActive: true
+    }
+  ]
+}
+</code></pre><h2 id="workflow-configuration">Workflow Configuration</h2>
+<p>The structure of the configuration is as follows</p>
+<pre><code>&lt;record-type&gt;
+|
+|- &lt;workflow-stage&gt;
+    |
+    |- config
+        |
+        |- workflow
+            |
+            |- stage
+            |- stageLabel
+            |- next
+        |- authorization
+            |
+            |- viewRoles
+            |- editRoles
+        |- form
+    |- starting
+</code></pre><p>Where &lt;&gt; are property labels that are variables.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Required</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; record-type &gt;</td>
+<td>The label of record type</td>
+<td>Yes</td>
+<td>rdmp</td>
+</tr>
+<tr>
+<td>&lt; workflow-stage &gt;</td>
+<td>The label of the workflow stage for the record type</td>
+<td>Yes</td>
+<td>draft</td>
+</tr>
+<tr>
+<td>stage</td>
+<td>The code value for the stage. This value is stored in the metadata record within ReDBox. Best practice would be to match it with &lt; workflow-stage &gt; but it can be different if necessary.</td>
+<td>Yes</td>
+<td>draft</td>
+</tr>
+<tr>
+<td>stageLabel</td>
+<td>The label for the stage that is presented to users on the interface.</td>
+<td>Yes</td>
+<td>Draft</td>
+</tr>
+<tr>
+<td>next</td>
+<td>The stage to transition to.</td>
+<td>No</td>
+<td>review</td>
+</tr>
+<tr>
+<td>viewRoles</td>
+<td>An array of roles that are allowed to view this record type at this stage</td>
+<td>Yes</td>
+<td>[&#39;Admin&#39;]</td>
+</tr>
+<tr>
+<td>editRoles</td>
+<td>An array of roles that are allowed to edit this record type at this stage</td>
+<td>Yes</td>
+<td>[&#39;Admin&#39;]</td>
+</tr>
+<tr>
+<td>form</td>
+<td>The form code. This should match an entry in the form.js configuration file</td>
+<td>Yes</td>
+<td>rdmp-1.0-draft</td>
+</tr>
+<tr>
+<td>starting</td>
+<td>Is this the stage that new records should commence in?</td>
+<td>No</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example">Example</h4>
+<pre><code>&quot;rdmp&quot;: {
+    &quot;draft&quot;: {
+      config: {
+        workflow: {
+          stage: &#39;draft&#39;,
+          stageLabel: &#39;Draft&#39;,
+          next: &#39;review&#39;,
+        },
+        authorization: {
+          viewRoles: [&#39;Admin&#39;],
+          editRoles: [&#39;Admin&#39;]
+        },
+        form: &#39;rdmp-1.0-draft&#39;
+      },
+      starting: true
+    },
+</code></pre><h2 id="form-view-configuration">Form/view configuration</h2>
+<p>The form and view layout is configured via config/form.js file.</p>
+<p>The structure of the configuration file is as follows</p>
+<pre><code>defaultForm
+|
+|- forms
+    |
+    |- &lt;form-name&gt;
+        |
+        |- name
+        |- type
+        |- skipValidationOnSave
+        |- editCssClasses
+        |- viewCssClasses
+        |- messages
+            |
+            |- &lt;message-code&gt;
+        |
+        |- fields []
+            |
+            |- class
+            |- compClass
+            |- viewOnly
+            |- definition
+                |
+                |- &lt;component specific properties&gt;
+
+</code></pre><h3 id="form-wide-configuration">Form-wide configuration</h3>
+<p>The settings in this section control the behaviour of the entire form.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Required</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; form-name &gt;</td>
+<td>The label name of the form, should match a &quot;form&quot; value in workflow.js for it to be used</td>
+<td>Yes</td>
+<td>rdmp-1.0-draft</td>
+</tr>
+<tr>
+<td>name</td>
+<td>The label name of the form. This should match the &lt; form-name &gt; value. form</td>
+<td>Yes</td>
+<td>rdmp-1.0-draft</td>
+</tr>
+<tr>
+<td>skipValidationOnSave</td>
+<td>When set to true, validation will only trigger when the record is submitted to change it&#39;s workflow state. This property is particularly useful in early stages of a workflow where you want the user to be able to save and come back to the record later without having to fill in all mandatory fields.</td>
+<td>No (defaults to false)</td>
+<td>true</td>
+</tr>
+<tr>
+<td>editCssClasses</td>
+<td>The css classes to apply to each element for styling. These are used in edit mode</td>
+<td>Yes</td>
+<td>row col-md-12</td>
+</tr>
+<tr>
+<td>viewCssClasses</td>
+<td>The css classes to apply to each element for styling. These are used in view mode</td>
+<td>Yes</td>
+<td>row col-md-12</td>
+</tr>
+<tr>
+<td>&lt; message-code &gt;</td>
+<td>A set of key value pairs containing messages to show to the user</td>
+<td>Yes</td>
+<td>&quot;saveSuccess&quot;: &quot;Saved successfully.&quot;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="field-configuration">Field configuration</h3>
+<p>The fields section lays out the components to appear in the form.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Required</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>class</td>
+<td></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>compClass</td>
+<td>The Component class name. See the <a href="https://redbox-mint.github.io/redbox-portal/components/ContributorComponent.html">Component documentation</a> for a list of available components and how to configure them</td>
+<td>Yes</td>
+<td>TextBlockComponent</td>
+</tr>
+<tr>
+<td>viewOnly</td>
+<td>When set to true, this component will only appear in the view (details) rendition of the form</td>
+<td>No (defaults to false)</td>
+<td>true</td>
+</tr>
+<tr>
+<td>editOnly</td>
+<td>When set to true, this component will only appear in the edit (details) rendition of the form</td>
+<td>No (defaults to false)</td>
+<td>true</td>
+</tr>
+<tr>
+<td>definition</td>
+<td>Configuration that is specific for the component being added. How to configure a component is described in the <a href="https://redbox-mint.github.io/redbox-portal/components/ContributorComponent.html">Component documentation</a></td>
+<td>Yes</td>
+<td>value: &#39;@dmpt-data-collection-heading&#39;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example">Example</h3>
+<pre><code>fields: [
+  {
+    class: &#39;Container&#39;,
+    compClass: &#39;TextBlockComponent&#39;,
+    viewOnly: true,
+    definition: {
+      name: &#39;title&#39;,
+      type: &#39;h1&#39;
+    }
+  },
+</code></pre><h2 id="language-configuration">Language Configuration</h2>
+<p>Messages in the system can be configured using Language files. This allows for internationalisation of the portal as well as editing in a translation management system such as <a href="https://locize.com">Locize</a>.</p>
+<p>The application uses <a href="https://www.i18next.com/">i18next</a> to render the messages and the language files are kept in the assests/locales/<language> directories.</p>
+<p>Please see the <a href="https://www.i18next.com/essentials.html">i18next documentation</a> for more information on how the language file is structured and it&#39;s features.</p>
+
+
+
+                        </div><!--//content-inner-->
+                    </div><!--//doc-content-->
+                    <div class="doc-sidebar hidden-xs">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                              
+                                  <li class="inactive">
+                                      <a href="/sysAdminDocumentation/introduction.html">
+                                          Introduction
+                                      </a>
+                                  </li>
+                              
+                                  <li class="inactive">
+                                      <a href="/sysAdminDocumentation/ConfigurationGuide.html">
+                                          Configuration Guide
+                                      </a>
+                                  </li>
+                              
+                                  <li class="inactive">
+                                      <a href="/sysAdminDocumentation/InstallationGuide.html">
+                                          Installation Guide
+                                      </a>
+                                  </li>
+                              
+                                  <li class="active">
+                                      <a href="/sysAdminDocumentation/configuration/Configuring web forms.html">
+                                          Configuring web forms
+                                      </a>
+                                  </li>
+                              
+                                  <li class="inactive">
+                                      <a href="/sysAdminDocumentation/REST API documentation.html">
+                                          REST API Documentation
+                                      </a>
+                                  </li>
+                              
+                            </ul><!--//doc-menu-->
+                        </nav>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->
+
+    </div><!--//page-wrapper-->
+
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+            <small class="copyright">Designed with <i class="fa fa-heart"></i> by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a> for developers</small>
+        </div><!--//container-->
+    </footer><!--//footer-->
+
+
+    <!-- Main Javascript -->
+    <script type="text/javascript" src="../assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/plugins/prism/prism.js"></script>
+    <script type="text/javascript" src="../assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="../assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="../assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<h1 id="configuring-aaf">Configuring AAF</h1>
+<h1 id="introduction">Introduction</h1>
+<p>The ReDBox portal is compatible out of the box with AAF Credentials.</p>
+<h2 id="configuring">Configuring</h2>
+<p>The <code>config/env/development.js</code> or <code>config/env/production.js</code> file provides the configuration objects for authorisation</p>
+<pre><code>auth: {
+    // Default brand...
+    default: {
+      active: [&quot;aaf&quot;, &quot;local&quot;],
+      aaf: {
+        loginUrl: &quot;https://rapid.test.aaf.edu.au/jwt/authnrequest/research/XXXXXX&quot;,
+        opts: {
+          secretOrKey: &#39;XXXXXX&#39;,
+          jsonWebTokenOptions: {
+            issuer: &#39;https://rapid.test.aaf.edu.au&#39;,
+            audience: &#39;https://dev-redbox.research.uts.edu.au/default/rdmp/&#39;,
+            ignoreNotBefore: true
+          }
+        }
+      }
+    }
+  }
+</code></pre><ul>
+<li>Proceed to <a href="https://rapid.test.aaf.edu.au">https://rapid.test.aaf.edu.au</a> for test environments and <a href="https://rapid.aaf.edu.au">https://rapid.aaf.edu.au</a> for production environments</li>
+<li>Register a new service<ul>
+<li>The Callback URL should be <code>&lt;Main domain&gt;/user/login_aaf</code></li>
+</ul>
+</li>
+<li>If it is a development environment a unique url will be automatically provided</li>
+</ul>

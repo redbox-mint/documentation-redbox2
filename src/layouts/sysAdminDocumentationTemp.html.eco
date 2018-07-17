@@ -15,7 +15,7 @@
     <!-- Global CSS -->
     <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
     <!-- Plugins CSS -->
-    <link rel="stylesheet" href="../assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/plugins/prism/prism.css">
     <link rel="stylesheet" href="../assets/plugins/elegant_font/css/style.css">
 
@@ -55,7 +55,7 @@
         <div class="doc-wrapper">
             <div class="container">
                 <div id="doc-header" class="doc-header text-center">
-                    <h1 class="doc-title"><i class="icon fa fa-<%= @document.icon %>"></i> <%= @document.title %></h1>
+                    <h1 class="doc-title"><i class="icon <%= @document.icon %>"></i> <%= @document.title %></h1>
                     <div class="meta"><i class="fa fa-clock-o"></i> Last updated: <b>Can be templated TO-DO</b></div>
                 </div><!--//doc-header-->
                 <div class="doc-body">
