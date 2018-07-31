@@ -1,4 +1,4 @@
-/*   
+/*
  * Template Name: PrettyDocs - Responsive Website Template for documentations
  * Version: 1.0
  * Author: Xiaoying Riley
@@ -75,8 +75,8 @@ a.btn .fa {
 }
 .btn-primary,
 a.btn-primary {
-  background: #40babd;
-  border: 1px solid #40babd;
+  background: #500005;
+  border: 1px solid #500005;
   color: #fff !important;
 }
 .btn-primary:hover,
@@ -273,7 +273,7 @@ select {
   -webkit-appearance: none;
 }
 #topcontrol {
-  background: #40babd;
+  background: #500005;
   color: #fff;
   text-align: center;
   display: inline-block;
@@ -307,9 +307,9 @@ select {
 }
 /* ====== Header ====== */
 .header {
-  background: #494d55;
+  background: #b1101a;
   color: rgba(255, 255, 255, 0.85);
-  border-top: 5px solid #40babd;
+  border-top: 5px solid #500005;
   padding: 30px 0;
 }
 .header a {
@@ -328,7 +328,7 @@ select {
   text-decoration: none;
 }
 .branding .text-highlight {
-  color: #40babd;
+  color: #500005;
 }
 .body-green .branding .text-highlight {
   color: #75c181;
@@ -354,7 +354,7 @@ select {
 }
 .branding .icon {
   font-size: 24px;
-  color: #40babd;
+  color: #500005;
 }
 .body-green .branding .icon {
   color: #75c181;
@@ -384,6 +384,7 @@ select {
 }
 .breadcrumb li.active {
   color: rgba(255, 255, 255, 0.5);
+  font-weight: bold;
 }
 .breadcrumb li a {
   color: rgba(255, 255, 255, 0.5);
@@ -401,7 +402,7 @@ select {
   padding: 15px 0;
 }
 .footer a {
-  color: #40babd;
+  color: #500005;
 }
 .footer .fa-heart {
   color: #EA5395;
@@ -418,7 +419,7 @@ select {
   margin-bottom: 30px;
 }
 .doc-header .doc-title {
-  color: #40babd;
+  color: #500005;
   margin-top: 0;
   font-size: 36px;
 }
@@ -803,7 +804,7 @@ select {
 }
 .doc-menu > li > a:hover,
 .doc-menu > li > a:focus {
-  color: #40babd;
+  color: #500005;
   text-decoration: none;
   background: none;
 }
@@ -833,8 +834,8 @@ select {
 }
 .doc-menu > li.active > a {
   background: none;
-  border-left: 4px solid #40babd;
-  color: #40babd;
+  border-left: 4px solid #500005;
+  color: #500005;
   font-weight: 600;
 }
 .body-green .doc-menu > li.active > a {
@@ -880,7 +881,7 @@ select {
   background: none;
 }
 .doc-sub-menu > li > a:hover {
-  color: #40babd;
+  color: #500005;
   text-decoration: none;
   background: none;
 }
@@ -907,7 +908,7 @@ select {
 }
 .doc-sub-menu > li.active > a {
   background: none;
-  color: #40babd;
+  color: #500005;
 }
 .body-green .doc-sub-menu > li.active > a {
   color: #75c181;
@@ -1077,7 +1078,7 @@ select {
 /* Large devices (large desktops, 1200px and up) */
 /* ======= Landing Page ======= */
 .landing-page .header {
-  background: #494d55;
+  background: #b1101a;
   color: rgba(255, 255, 255, 0.85);
   padding: 60px 0;
 }
@@ -1099,7 +1100,7 @@ select {
 }
 .landing-page .branding .icon {
   font-size: 32px;
-  color: #40babd;
+  color: #500005;
 }
 .landing-page .tagline {
   font-weight: 600;
@@ -1194,13 +1195,13 @@ select {
   background: #f5f5f5;
 }
 .cards-section .item-primary .item-inner {
-  border-top: 3px solid #40babd;
+  border-top: 3px solid #500005;
 }
 .cards-section .item-primary .item-inner:hover .title {
   color: #2d8284;
 }
 .cards-section .item-primary .icon {
-  color: #40babd;
+  color: #500005;
 }
 .cards-section .item-green .item-inner {
   border-top: 3px solid #75c181;
