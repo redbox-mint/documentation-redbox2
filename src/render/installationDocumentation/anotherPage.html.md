@@ -1,8 +1,8 @@
 ---
 title: "Another page"
-icon: "pied-piper"
-layout: "userDocumentationTemp"
-isUserDocumentation: true
+icon: "lightbulb-o"
+layout: "installationDocumentationTemp"
+isInstallationDocumentation: true
 menuIndex: 2
 ---
 

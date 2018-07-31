@@ -1,8 +1,8 @@
 ---
 title: "Introduction"
 icon: "lightbulb-o"
-layout: "userDocumentationTemp"
-isUserDocumentation: true
+layout: "installationDocumentationTemp"
+isInstallationDocumentation: true
 menuIndex: 1
 ---
 
