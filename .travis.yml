@@ -1,8 +1,6 @@
 language: node_js
-before_script:
-- chmod +x prebuild.sh;./prebuild.sh
 script:
-- docpad deploy-ghpages --env static
+- chmod +x prebuild.sh;./prebuild.sh; docpad deploy-ghpages --env static
 env:
   global:
   - GH_REPO="redbox-mint/documentation-redbox2"
