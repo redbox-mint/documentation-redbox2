@@ -69,7 +69,7 @@
                             <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
                               <% for page in @getCollection("html").findAll({isSysAdminDocumentation:true},[{menuIndex:1}]).toJSON(): %>
                                   <li class="<%= if page.id is @document.id then 'active' else 'inactive' %>">
-                                      <a href="<%= page.url %>">
+                                      <a href="..<%= page.url %>">
                                           <%= page.title %>
                                       </a>
                                   </li>
