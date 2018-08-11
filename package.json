@@ -6,7 +6,8 @@
     "docpad": "~6.79.0",
     "docpad-plugin-eco": "~2.1.0",
     "docpad-plugin-ghpages": "~2.4.4",
-    "docpad-plugin-marked": "~2.3.0"
+    "docpad-plugin-marked": "~2.3.0",
+    "moment": "^2.22.2"
   },
   "main": "node_modules/.bin/docpad-server",
   "scripts": {

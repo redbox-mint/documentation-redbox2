@@ -1,3 +1,7 @@
+moment = require('moment');
+
+console.log(moment())
+console.log({}.toString.call(moment));
 #DocPad Configuration
 docpadConfig = {
 
@@ -270,6 +274,8 @@ docpadConfig = {
             keywords: """
                 place, your, website, keywoards, here, keep, them, related, to, the, content, of, your, website
                 """
+
+        moment: moment
 
 
         # -----------------------------

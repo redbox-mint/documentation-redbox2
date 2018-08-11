@@ -1,6 +1,6 @@
 ---
 title: "Configuring web forms"
-icon: "fab fa-aviato"
+icon: "fab fa-arrow"
 layout: "sysAdminDocumentationTemp"
 isSysAdminDocumentation: true
 menuIndex: 2

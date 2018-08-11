@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<% treeDepth =  @document.relativePath.split('/').length; %>
+<% treeDepth = treeDepth - 1 %>
+<% relativePathString = "../".repeat(treeDepth) %>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
@@ -13,14 +16,14 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <!-- Global CSS -->
-    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%= relativePathString %>assets/plugins/bootstrap/css/bootstrap.min.css">
     <!-- Plugins CSS -->
-    <link rel="stylesheet" href="../assets/plugins/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="../assets/plugins/prism/prism.css">
-    <link rel="stylesheet" href="../assets/plugins/elegant_font/css/style.css">
+    <link rel="stylesheet" href="<%= relativePathString %>assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="<%= relativePathString %>assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="<%= relativePathString %>assets/plugins/elegant_font/css/style.css">
 
     <!-- Theme CSS -->
-    <link id="theme-style" rel="stylesheet" href="../assets/css/styles.css">
+    <link id="theme-style" rel="stylesheet" href="<%= relativePathString %>assets/css/styles.css">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -36,16 +39,16 @@
             <div class="container">
                 <div class="branding">
                     <h1 class="logo">
-                        <a href="../index.html">
+                        <a href="<%= relativePathString %>index.html">
                             <img aria-hidden="true" style="height: 80px;" src="https://www.redboxresearchdata.com.au/images/RedBox_Logo_Box_Small.png"></img>
                         </a>
                     </h1>
                 </div><!--//branding-->
                 <ol class="breadcrumb">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="../installationDocumentation/introduction.html">Installation</a></li>
-                    <li class="active"><a href="../siteAdminDocumentation/introduction.html">For site admins</a></li>
-                    <li><a href="../sysAdminDocumentation/introduction.html">For sys admins</a></li>
+                    <li><a href="<%= relativePathString %>index.html">Home</a></li>
+                    <li><a href="<%= relativePathString %>installationDocumentation/introduction.html">Installation</a></li>
+                    <li class="active"><a href="<%= relativePathString %>siteAdminDocumentation/introduction.html">For site admins</a></li>
+                    <li><a href="<%= relativePathString %>sysAdminDocumentation/introduction.html">For sys admins</a></li>
 
                 </ol>
             </div><!--//container-->
@@ -54,7 +57,7 @@
             <div class="container">
                 <div id="doc-header" class="doc-header text-center">
                     <h1 class="doc-title"><i class="icon fa fa-<%= @document.icon %>"></i> <%= @document.title %></h1>
-                    <div class="meta"><i class="fa fa-clock-o"></i> Last updated: <b>Can be templated TO-DO</b></div>
+                    <div class="meta"><i class="fa fa-clock-o"></i> Last updated: <b><%= @moment(@document.date).format('MMMM Do YYYY') %></b></div>
                 </div><!--//doc-header-->
                 <div class="doc-body">
                     <div class="doc-content">
@@ -93,12 +96,12 @@
 
 
     <!-- Main Javascript -->
-    <script type="text/javascript" src="../assets/plugins/jquery-1.12.3.min.js"></script>
-    <script type="text/javascript" src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../assets/plugins/prism/prism.js"></script>
-    <script type="text/javascript" src="../assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
-    <script type="text/javascript" src="../assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
-    <script type="text/javascript" src="../assets/js/main.js"></script>
+    <script type="text/javascript" src="<%= relativePathString %>assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="<%= relativePathString %>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<%= relativePathString %>assets/plugins/prism/prism.js"></script>
+    <script type="text/javascript" src="<%= relativePathString %>assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="<%= relativePathString %>assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="<%= relativePathString %>assets/js/main.js"></script>
 
 </body>
 </html>
