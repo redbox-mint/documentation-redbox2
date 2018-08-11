@@ -1,7 +1,5 @@
 moment = require('moment');
 
-console.log(moment())
-console.log({}.toString.call(moment));
 #DocPad Configuration
 docpadConfig = {
 
