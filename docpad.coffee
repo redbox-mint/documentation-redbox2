@@ -258,7 +258,7 @@ docpadConfig = {
         # Specify some site properties
         site:
             # The production URL of our website
-            url: "http://website.com"
+            url: "http://localhost:9778"
 
             # The default title of our website
             title: "Your Website"
@@ -365,6 +365,10 @@ docpadConfig = {
     # Allows us to set custom configuration for specific environments
     environments:  # default
         development:  # default
+           templateData:
+                # Specify some site properties
+              site:
+                  url: "http://localhost:9778"
             # Always refresh from server
             maxAge: false  # default
 
@@ -375,6 +379,11 @@ docpadConfig = {
 
             # Listen to port 9005 on the development environment
             port: 9778  # example
+        githubpages:
+            templateData:
+              # Specify some site properties
+              site:
+                  url: "http://redbox-mint.github.io/documentation-redbox2"
 }
 
 # Export the DocPad Configuration

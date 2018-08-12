@@ -29,7 +29,6 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body>
@@ -74,7 +73,7 @@
                                   <% if page.parentId is undefined: %>
 
                                   <li class="<%= if page.id is @document.id then 'active' else 'inactive' %>">
-                                      <a href="<%= page.url %>">
+                                      <a href="<%= @site.url+page.url %>">
                                           <%= page.title %>
                                       </a>
 
@@ -84,7 +83,7 @@
                                           <ul class="doc-submenu">
                                             <% for subpage in subpages: %>
                                             <li class="<%= if subpage.id is @document.id then 'active' else 'inactive' %>">
-                                                <a href="<%= subpage.url %>">
+                                                <a href="<%= @site.url+subpage.url %>">
                                                     <%= subpage.title %>
                                                 </a>
                                              </li>

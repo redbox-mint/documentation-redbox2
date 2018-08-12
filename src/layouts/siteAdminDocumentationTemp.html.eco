@@ -72,11 +72,29 @@
                         <nav id="doc-nav">
                             <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
                               <% for page in @getCollection("html").findAll({isSiteAdminDocumentation:true},[{menuIndex:1}]).toJSON(): %>
-                                  <li class="<%= if page.id is @document.id then 'active' else 'inactive' %>">
-                                      <a href="..<%= page.url %>">
-                                          <%= page.title %>
-                                      </a>
-                                  </li>
+                              <% if page.parentId is undefined: %>
+
+                              <li class="<%= if page.id is @document.id then 'active' else 'inactive' %>">
+                                  <a href="<%= @site.url+page.url %>">
+                                      <%= page.title %>
+                                  </a>
+
+                                  <% if page.ident: %>
+                                    <% subpages = @getCollection("html").findAll({ parentId: page.ident},[{menuIndex:1}]).toJSON() %>
+                                    <% if subpages.length >0 : %>
+                                      <ul class="doc-submenu">
+                                        <% for subpage in subpages: %>
+                                        <li class="<%= if subpage.id is @document.id then 'active' else 'inactive' %>">
+                                            <a href="<%= @site.url+subpage.url %>">
+                                                <%= subpage.title %>
+                                            </a>
+                                         </li>
+                                        <% end %>
+                                      </ul>
+                                    <% end %>
+                                  <% end %>
+                              </li>
+                              <% end %>
                               <% end %>
                             </ul><!--//doc-menu-->
                         </nav>

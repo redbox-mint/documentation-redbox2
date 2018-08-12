@@ -1,6 +1,6 @@
 ---
 title: "Configuring email notifications"
-icon: "fab fa-arrow"
+icon: "fas fa-info-circle"
 layout: "sysAdminDocumentationTemp"
 parentId: "sys-config"
 isSysAdminDocumentation: true
