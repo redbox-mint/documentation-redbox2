@@ -1,4 +1,11 @@
-# Configuring AAF
+---
+title: "Configuring AAF"
+icon: "fas fa-info-circle"
+layout: "sysAdminDocumentationTemp"
+parentId: "sys-config"
+isSysAdminDocumentation: true
+menuIndex: 4
+---
 
 # Introduction
 

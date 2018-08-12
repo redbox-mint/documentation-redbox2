@@ -102,6 +102,10 @@
     <script type="text/javascript" src="<%= relativePathString %>assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
     <script type="text/javascript" src="<%= relativePathString %>assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
     <script type="text/javascript" src="<%= relativePathString %>assets/js/main.js"></script>
-
+    <script>
+      $(document).ready(function() {
+        $(".doc-body").css("min-height", $("#doc-menu").outerHeight()+"px");
+      });
+    </script>
 </body>
 </html>

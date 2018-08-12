@@ -1,6 +1,6 @@
 ---
 title: "Another page"
-icon: "pied-piper"
+icon: "fas fa-info-circle"
 layout: "siteAdminDocumentationTemp"
 isSiteAdminDocumentation: true
 menuIndex: 2

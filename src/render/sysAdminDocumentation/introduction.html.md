@@ -1,6 +1,6 @@
 ---
 title: "Introduction"
-icon: "lightbulb-o"
+icon: "fas fa-info-circle"
 layout: "sysAdminDocumentationTemp"
 isSysAdminDocumentation: true
 menuIndex: 1

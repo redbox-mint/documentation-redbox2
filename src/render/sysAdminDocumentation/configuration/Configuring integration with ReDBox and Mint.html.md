@@ -1,4 +1,11 @@
-# Configuring integration with ReDBox and Mint
+---
+title: "Configuring integration with ReDBox and Mint"
+icon: "fas fa-info-circle"
+layout: "sysAdminDocumentationTemp"
+parentId: "sys-config"
+isSysAdminDocumentation: true
+menuIndex: 2
+---
 
 ## Introduction
 

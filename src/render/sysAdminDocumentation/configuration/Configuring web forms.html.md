@@ -1,11 +1,11 @@
 ---
 title: "Configuring web forms"
-icon: "fab fa-arrow"
+icon: "fas fa-info-circle"
 layout: "sysAdminDocumentationTemp"
+parentId: "sys-config"
 isSysAdminDocumentation: true
-menuIndex: 2
+menuIndex: 1
 ---
-# Configuring web forms
 
 ## Introduction
 

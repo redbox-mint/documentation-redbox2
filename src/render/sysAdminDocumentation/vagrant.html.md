@@ -1,6 +1,6 @@
 ---
 title: "Vagrant"
-icon: "lightbulb-o"
+icon: "fas fa-info-circle"
 layout: "sysAdminDocumentationTemp"
 isSysAdminDocumentation: true
 menuIndex: 6

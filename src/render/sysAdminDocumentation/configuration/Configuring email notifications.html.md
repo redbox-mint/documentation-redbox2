@@ -1,5 +1,11 @@
-# Configuring email notifications
-
+---
+title: "Configuring email notifications"
+icon: "fab fa-arrow"
+layout: "sysAdminDocumentationTemp"
+parentId: "sys-config"
+isSysAdminDocumentation: true
+menuIndex: 3
+---
 ## Introduction
 
 The ReDBox portal has a flexible email notification system that can be customised to your needs.

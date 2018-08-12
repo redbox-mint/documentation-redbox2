@@ -1,6 +1,7 @@
 ---
 title: "Configuration Guide"
-icon: "fab fa-pied-piper-alt"
+ident: "sys-config"
+icon: "fas fa-info-circle"
 layout: "sysAdminDocumentationTemp"
 isSysAdminDocumentation: true
 menuIndex: 2

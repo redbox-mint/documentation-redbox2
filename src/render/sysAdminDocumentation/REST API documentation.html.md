@@ -1,6 +1,6 @@
 ---
 title: "REST API Documentation"
-icon: "fab fa-hooli"
+icon: "fas fa-info-circle"
 layout: "sysAdminDocumentationTemp"
 isSysAdminDocumentation: true
 menuIndex: 3
