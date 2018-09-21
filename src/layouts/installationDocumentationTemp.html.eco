@@ -1,7 +1,14 @@
 <!DOCTYPE html>
+<% if @document.relativePath.indexOf('\\') == -1: %>
 <% treeDepth =  @document.relativePath.split('/').length; %>
 <% treeDepth = treeDepth - 1 %>
 <% relativePathString = "../".repeat(treeDepth) %>
+<% end %>
+<% if @document.relativePath.indexOf('\\') != -1: %>
+<% treeDepth =  @document.relativePath.split('\\').length; %>
+<% treeDepth = treeDepth - 1 %>
+<% relativePathString = "../".repeat(treeDepth) %>
+<% end %>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
