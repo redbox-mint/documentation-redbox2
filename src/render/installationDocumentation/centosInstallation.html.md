@@ -76,7 +76,7 @@ Substitute your name or suitably meaningful name in the following
 ```
 sudo su
 
-cat << EOF >> /etc/nginx/conf.d/default.conf
+cat << 'EOF' >> /etc/nginx/conf.d/default.conf
 server {
 listen 80;
 server_name  [yourname].redboxresearchdata.com.au;
@@ -117,6 +117,15 @@ proxy_set_header X-Forwarded-Proto http;
 EOF
 
 exit
+```
+then
+
+```
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.old
+
+sudo cp /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/default
+
+sudo service nginx restart
 ```
 
 ## Install GIT
