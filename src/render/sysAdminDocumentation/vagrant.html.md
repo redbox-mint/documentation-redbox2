@@ -30,7 +30,7 @@ RedBox<br>
 
 4. Clone the ReDBox Portal project from GitHub into the directory you configured to sync
 
-`git clone https://github.com/redbox-mint/redbox-portal-dev.git`
+`git clone https://github.com/redbox-mint/redbox-portal.git`
 
 5. Bring box up
 
