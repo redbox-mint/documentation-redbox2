@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+    <title>Installation on CentOS | ReDBox Documentation</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="../assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="../assets/plugins/elegant_font/css/style.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../assets/css/styles.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="../index.html">
+                            <img aria-hidden="true" style="height: 80px;" src="https://www.redboxresearchdata.com.au/images/RedBox_Logo_Box_Small.png"></img>
+                        </a>
+                    </h1>
+                </div><!--//branding-->
+                <ol class="breadcrumb">
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="active">Installation</li>
+                    <li><a href="../siteAdminDocumentation/introduction.html">For site admins</a></li>
+                    <li><a href="../sysAdminDocumentation/introduction.html">For sys admins</a></li>
+
+                </ol>
+            </div><!--//container-->
+        </header><!--//header-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon fa fa-fas fa-info-circle"></i> Installation on CentOS</h1>
+                    <div class="meta"><i class="fa fa-clock-o"></i> Last updated: <b>November 6th 2018</b></div>
+                </div><!--//doc-header-->
+                <div class="doc-body">
+                    <div class="doc-content">
+                        <div class="content-inner">
+
+                            <h1 id="preparation-">Preparation </h1>
+<ul>
+<li>This install guide has been tested on VM instances running Centos 7.</li>
+<li>This is a straight forward source install. Docker container based installation is documented <a href="./dockerInstallation.html">here</a></li>
+<li>Assumes commands are entered in the VM shell using Putty or similar.</li>
+<li>Also assumes you are not logged in as root but have sudo access.</li>
+<li>Get your VM’s IP address (e.g. hostname -I) or assigned URL.</li>
+</ul>
+<h1 id="dependencies">Dependencies</h1>
+<h2 id="install-node-js-8-x">Install Node.js 8.x</h2>
+<p>First you need to add yum repository of node.js to your system from the nodejs’ website using the following commands.</p>
+<pre><code>sudo yum install -y gcc-c++ make
+
+curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
+
+sudo yum install -y nodejs</code></pre><h2 id="install-yarn">Install Yarn</h2>
+<p>To install the Yarn package manager, run:</p>
+<pre><code>curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+
+sudo yum install yarn</code></pre><h2 id="install-java-8">Install Java 8</h2>
+<pre><code>sudo yum install java-1.8.0-openjdk</code></pre><h2 id="install-mongodb-4-0">Install MongoDB 4.0</h2>
+<p>Instructions on installing MongoDB for can be found <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/">here</a>. Warning, these instructions change frequently, so rather than us documenting it here it is best to use their installation commands. Just follow the instructions for <em>installing the .rpm packages</em>.</p>
+<p><strong>Start MongoDB.</strong> </p>
+<p>Issue the following command to start mongod:</p>
+<pre><code>sudo service mongod start</code></pre><p><strong>Verify that MongoDB has started successfully</strong></p>
+<p>Verify that the mongod process has started successfully by checking the contents of the log file at /var/log/mongodb/mongod.log for a line reading: [initandlisten] waiting for connections on port 27017</p>
+<h2 id="install-nginx">Install nginx</h2>
+<p>Additional information on installing the NGINX web server can be found <a href="https://www.nginx.com/resources/wiki/start/topics/tutorials/install/">here</a></p>
+<p><strong>Install nginx</strong></p>
+<pre><code>sudo yum install nginx</code></pre><p><strong>Update the config file for reverse proxy configuration</strong></p>
+<p>Substitute your name or suitably meaningful name in the following</p>
+<pre><code>sudo su
+
+cat &lt;&lt; &#39;EOF&#39; &gt;&gt; /etc/nginx/conf.d/default.conf
+server {
+listen 80;
+server_name  [yourname].redboxresearchdata.com.au;
+
+#charset koi8-r;
+#access_log  /var/log/nginx/log/host.access.log  main;
+
+# redirect server error pages to the static page /50x.html
+#
+error_page   500 502 503 504  /50x.html;
+location = /50x.html {
+root   /usr/share/nginx/html;
+}
+
+add_header   Strict-Transport-Security &quot;max-age=31536000; includeSubdomains&quot;;
+add_header   X-Content-Type-Options nosniff;
+add_header   X-Frame-Options DENY;
+
+location / {
+proxy_pass http://localhost:1337;
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto http;
+
+}
+
+location /mint {
+proxy_pass http://localhost:9001/mint;
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto http;
+
+}
+
+}
+EOF
+
+exit</code></pre><p>then</p>
+<pre><code>sudo mkdir -p /etc/nginx/sites-available
+
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.old
+
+sudo cp /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/default
+
+sudo service nginx restart</code></pre><h2 id="install-git">Install GIT</h2>
+<pre><code>sudo yum install git-core</code></pre><h2 id="install-yarn-and-pm2-dependencies">Install Yarn and PM2 dependencies</h2>
+<p>Once you have a Node.js environment installed install the following dependencies globally using the npm install -g <dependency> command:</p>
+<pre><code>sudo npm install -g yarn
+
+sudo npm install -g pm2</code></pre><h2 id="install-mint">Install Mint</h2>
+<p>While Mint is a component of ReDBox, it gets installed and runs separately.</p>
+<pre><code>cd /opt
+
+sudo wget &quot;http://dev.redboxresearchdata.com.au/nexus/service/local/artifact/maven/redirect?r=releases&amp;g=com.googlecode.redbox-mint&amp;a=mint-distro&amp;v=LATEST&amp;e=tar.gz&quot; -O &quot;mint.tar.gz&quot;
+
+sudo tar -xvzf mint.tar.gz
+
+sudo chown -R $USER:$(id -gn $USER) /opt/mint/
+
+sudo rm mint.tar.gz</code></pre><p>Edit the environment variables if required in <em>/opt/mint/server/tf_env.sh</em></p>
+<p>Edit tf_env.sh and change line 6 <em><a href="http://localhost:9001/mint/">http://localhost:9001/mint/</a></em> replacing localhost:9001 with your server ip address or URL.</p>
+<p><strong>Start Mint</strong></p>
+<pre><code>cd /opt/mint/server/
+
+./tf.sh start</code></pre><p>Checking it is working properly
+View <em>/opt/mint/home/logs/main.log</em> and check that it finishes with a message about all Queues Starting Successfully. If not check /opt/mint/home/logs/stdout.out and /opt/mint/home/logs/spring.log</p>
+<h2 id="install-redbox">Install ReDBox</h2>
+<pre><code>cd /opt
+
+sudo wget &quot;http://dev.redboxresearchdata.com.au/nexus/service/local/artifact/maven/redirect?r=snapshots&amp;g=com.googlecode.redbox-mint&amp;a=redbox-distro&amp;v=2.0-SNAPSHOT&amp;c=build&amp;e=tar.gz&quot; -O &quot;redbox.tar.gz&quot;
+
+sudo tar -xvzf redbox.tar.gz
+
+sudo chown -R $USER:$(id -gn $USER) /opt/redbox/
+
+sudo rm redbox.tar.gz</code></pre><p>Edit the environment variables if required in <em>/opt/redbox/server/tf_env.sh</em></p>
+<p><strong>Start ReDBox</strong> </p>
+<pre><code>cd /opt/redbox/server/
+
+./tf.sh start</code></pre><p>Checking it is working properly</p>
+<p>View * /opt/redbox/home/logs/main.log * and check that it finishes with a message about all Queues Starting Successfully. If not check * /opt/redbox/home/logs/stdout.out * and * /opt/redbox/home/logs/spring.log *</p>
+<h2 id="install-redbox-portal">Install RedBox-Portal</h2>
+<p>Currently the portal is installed using git clone, but the release will use NPM.</p>
+<p>Make sure git clones with https.</p>
+<pre><code>sudo git config --global url.&quot;https://&quot;.insteadOf git://
+
+git config --global url.&quot;https://&quot;.insteadOf git://</code></pre><p><strong>Clone the repo</strong> </p>
+<pre><code>cd /opt
+
+sudo git clone -b dev_build https://github.com/redbox-mint/redbox-portal.git</code></pre><p><strong>Overlay any custom build files</strong> </p>
+<p>If you have QCIF custom build files (or your own), they can be overlayed now.</p>
+<p><strong>Populate the dependencies</strong>
+Running yarn with centos&#39; default gcc may fail compilation, so upgrade the vm&#39;s related libraries first.</p>
+<pre><code>cd /opt/redbox-portal
+sudo yum install centos-release-scl
+sudo yum install devtoolset-6-gcc*
+scl enable devtoolset-6 bash
+
+sudo yarn</code></pre><p><strong>Set Permissions</strong></p>
+<pre><code>sudo chown -R $USER:$(id -gn $USER) /opt/redbox-portal/</code></pre><p><strong>Run the ReDBox configuration script</strong> </p>
+<pre><code>node configureInstall.js</code></pre><p>When the configuration script asks you which apikey to use, let it default as it will generate the apikey and place it both into the ReDBox Storage * /opt/redbox/data/security/apiKeys.json*  and RedBox-Portal * /opt/redbox-portal/ecosystem.json *
+When the configuration script asks you which URL the application will be accessed from, enter the IP address of the server you are installing to or URL assigned.</p>
+<p><strong>Restart ReDBox Storage</strong></p>
+<pre><code>cd /opt/redbox/server/
+
+./tf.sh restart</code></pre><p>(check logs)</p>
+<p><strong>Start ReDBox Portal</strong></p>
+<pre><code>cd /opt/redbox-portal/</code></pre><p>Setup PM2 (Process Manager for Node.JS) to run on init  </p>
+<pre><code>pm2 startup systemd</code></pre><p>and follow the instructions (if any) for pasting startup commands, e.g: * sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user *</p>
+<pre><code>pm2 start ecosystem.json</code></pre><p><strong>Save the PM2 configuration</strong></p>
+<pre><code>pm2 save</code></pre><p><strong>Check for errors</strong></p>
+<pre><code>pm2 logs</code></pre><p>Message should say “App lifted successfully”.</p>
+
+
+
+                        </div><!--//content-inner-->
+                    </div><!--//doc-content-->
+                    <div class="doc-sidebar hidden-xs">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                              
+                              
+
+                              <li class="inactive">
+                                  <a href="http://redbox-mint.github.io/documentation-redbox2/installationDocumentation/introduction.html">
+                                      Introduction
+                                  </a>
+
+                                  
+                              </li>
+                              
+                              
+                              
+
+                              <li class="inactive">
+                                  <a href="http://redbox-mint.github.io/documentation-redbox2/installationDocumentation/ubuntuInstallation.html">
+                                      Installation on Ubuntu
+                                  </a>
+
+                                  
+                              </li>
+                              
+                              
+                              
+
+                              <li class="active">
+                                  <a href="http://redbox-mint.github.io/documentation-redbox2/installationDocumentation/centosInstallation.html">
+                                      Installation on CentOS
+                                  </a>
+
+                                  
+                              </li>
+                              
+                              
+                              
+
+                              <li class="inactive">
+                                  <a href="http://redbox-mint.github.io/documentation-redbox2/installationDocumentation/dockerInstallation.html">
+                                      Installation on Docker
+                                  </a>
+
+                                  
+                              </li>
+                              
+                              
+                            </ul><!--//doc-menu-->
+                        </nav>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->
+
+    </div><!--//page-wrapper-->
+
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+            <small class="copyright">Designed with <i class="fa fa-heart"></i> by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a> for developers</small>
+        </div><!--//container-->
+    </footer><!--//footer-->
+
+
+    <!-- Main Javascript -->
+    <script type="text/javascript" src="../assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/plugins/prism/prism.js"></script>
+    <script type="text/javascript" src="../assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="../assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="../assets/js/main.js"></script>
+    <script>
+      $(document).ready(function() {
+        $(".doc-body").css("min-height", $("#doc-menu").outerHeight()+"px");
+      });
+    </script>
+</body>
+</html>

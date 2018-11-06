@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+    <title>Vagrant | ReDBox Documentation</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="../assets/plugins/elegant_font/css/style.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../assets/css/styles.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="../index.html">
+                            <img aria-hidden="true" style="height: 80px;" src="https://www.redboxresearchdata.com.au/images/RedBox_Logo_Box_Small.png"></img>
+                        </a>
+                    </h1>
+                </div><!--//branding-->
+                <ol class="breadcrumb">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../installationDocumentation/introduction.html">Installation</a></li>
+                    <li><a href="../siteAdminDocumentation/introduction.html">For site admins</a></li>
+                    <li class="active">For sys admins</li>
+                </ol>
+            </div><!--//container-->
+        </header><!--//header-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon fas fa-info-circle"></i> Vagrant</h1>
+                    <div class="meta"><i class="fa fa-clock-o"></i> Last updated: <b>November 6th 2018</b></div>
+                </div><!--//doc-header-->
+                <div class="doc-body">
+                    <div class="doc-content">
+                        <div class="content-inner">
+
+                            <p>The ReDBox team have put together a vagrant box for development use. The vagrant box may also be suitable for spinning up an instance of the system for evaluation purposes.</p>
+<h2 id="installation-instructions">Installation instructions</h2>
+<ol>
+<li>Install Vagrant and Unison</li>
+</ol>
+<p>If you&#39;re using OSX you may wish to follow the instructions further down this page to install the required components using Homebrew. Otherwise, see the <a href="https://www.vagrantup.com/docs/installation/">Vagrant </a> and <a href="https://www.cis.upenn.edu/~bcpierce/unison/">Unison</a> websites for instructions on how to install them for your system.</p>
+<ol start="2">
+<li>Clone the vagrant-redbox-dev repository from GitHub</li>
+</ol>
+<p><code>git clone https://github.com/qcif/vagrant-redbox-dev.git</code></p>
+<ol start="3">
+<li>Configure source directory to be mounted on box
+Edit the Vagrantfile and set the config.unison.host_folder to the directory you&#39;d like to sync. By default this is setup to be the parent directory so if you structure your directories in the following way then you can skip this step.</li>
+</ol>
+<p>RedBox<br>
+|<br>
+| - vagrant-redbox-dev<br>
+|<br>
+| - redbox-portal<br>
+|<br></p>
+<ol start="4">
+<li>Clone the ReDBox Portal project from GitHub into the directory you configured to sync</li>
+</ol>
+<p><code>git clone https://github.com/redbox-mint/redbox-portal.git</code></p>
+<ol start="5">
+<li>Bring box up</li>
+</ol>
+<p><code>vagrant up</code></p>
+<p>Your box should initialise and install all the required development tools</p>
+<ol start="6">
+<li>Install vagrant unison plugin</li>
+</ol>
+<p><code>vagrant plugin install vagrant-unison2</code></p>
+<ol start="7">
+<li>Start unison file synching</li>
+</ol>
+<p><code>vagrant unison-sync-polling</code></p>
+<p>This will start polling every second your local machine share directory and the directory on the virtual machine and keep them in sync as files change. You may want to do this in another console window as this will stay running until you hit Ctrl+C</p>
+<ol start="8">
+<li>SSH onto box</li>
+</ol>
+<p><code>vagrant ssh</code></p>
+<ol start="9">
+<li>Navigate to the redbox-portal directory</li>
+</ol>
+<p><code>cd source/redbox-portal</code></p>
+<ol start="10">
+<li>Build the portal and start the application</li>
+</ol>
+<p><code>./runForDev.sh install jit</code></p>
+<p>This command will launch docker, run yarn to download any required dependencies and build the Angular applications that the portal uses. For subsequent runs you can just start the application using the command</p>
+<p><code>./runForDev.sh</code></p>
+<h2 id="installing-on-the-mac-via-homebrew">Installing on the Mac via Homebrew</h2>
+<ol>
+<li><a href="http://brew.sh/">Install Homebrew</a></li>
+</ol>
+<p><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code></p>
+<ol start="2">
+<li>Install Vagrant and Unison on local machine</li>
+</ol>
+<p><code>brew install vagrant</code>
+or
+<code>brew cask install vagrant</code></p>
+<p><code>brew install unison</code></p>
+
+
+
+                        </div><!--//content-inner-->
+                    </div><!--//doc-content-->
+                    <div class="doc-sidebar hidden-xs">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                              
+                                  
+
+                                  <li class="inactive">
+                                      <a href="http://redbox-mint.github.io/documentation-redbox2/sysAdminDocumentation/introduction.html">
+                                          Introduction
+                                      </a>
+
+                                      
+                                  </li>
+                                  
+                              
+                                  
+                              
+                                  
+
+                                  <li class="inactive">
+                                      <a href="http://redbox-mint.github.io/documentation-redbox2/sysAdminDocumentation/ConfigurationGuide.html">
+                                          Configuration Guide
+                                      </a>
+
+                                      
+                                        
+                                        
+                                          <ul class="doc-submenu">
+                                            
+                                            <li class="inactive">
+                                                <a href="http://redbox-mint.github.io/documentation-redbox2/sysAdminDocumentation/configuration/Configuring web forms.html">
+                                                    Configuring web forms
+                                                </a>
+                                             </li>
+                                            
+                                            <li class="inactive">
+                                                <a href="http://redbox-mint.github.io/documentation-redbox2/sysAdminDocumentation/configuration/Configuring integration with ReDBox and Mint.html">
+                                                    Configuring integration with ReDBox and Mint
+                                                </a>
+                                             </li>
+                                            
+                                            <li class="inactive">
+                                                <a href="http://redbox-mint.github.io/documentation-redbox2/sysAdminDocumentation/configuration/Configuring email notifications.html">
+                                                    Configuring email notifications
+                                                </a>
+                                             </li>
+                                            
+                                            <li class="inactive">
+                                                <a href="http://redbox-mint.github.io/documentation-redbox2/sysAdminDocumentation/configuration/Configuring AAF.html">
+                                                    Configuring AAF
+                                                </a>
+                                             </li>
+                                            
+                                          </ul>
+                                        
+                                      
+                                  </li>
+                                  
+                              
+                                  
+                              
+                                  
+
+                                  <li class="inactive">
+                                      <a href="http://redbox-mint.github.io/documentation-redbox2/sysAdminDocumentation/REST API documentation.html">
+                                          REST API Documentation
+                                      </a>
+
+                                      
+                                  </li>
+                                  
+                              
+                                  
+                              
+                                  
+                              
+                                  
+
+                                  <li class="active">
+                                      <a href="http://redbox-mint.github.io/documentation-redbox2/sysAdminDocumentation/vagrant.html">
+                                          Vagrant
+                                      </a>
+
+                                      
+                                  </li>
+                                  
+                              
+                            </ul><!--//doc-menu-->
+                        </nav>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->
+
+    </div><!--//page-wrapper-->
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+            <small class="copyright">Designed with <i class="fa fa-heart"></i> by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a> for developers</small>
+        </div><!--//container-->
+    </footer><!--//footer-->
+
+
+    <!-- Main Javascript -->
+    <script type="text/javascript" src="../assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/plugins/prism/prism.js"></script>
+    <script type="text/javascript" src="../assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="../assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="../assets/js/main.js"></script>
+    <script>
+      $(document).ready(function() {
+        $(".doc-body").css("min-height", $("#doc-menu").outerHeight()+"px");
+      });
+    </script>
+</body>
+</html>
