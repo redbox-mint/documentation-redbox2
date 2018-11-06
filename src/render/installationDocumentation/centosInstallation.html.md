@@ -45,7 +45,7 @@ sudo yum install java-1.8.0-openjdk
 
 ## Install MongoDB 4.0
 
-Instructions on installing MongoDB for Ubuntu can be found [here](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/). Warning, these instructions change frequently, so rather than us documenting it here it is best to use their installation commands. Just follow the instructions for *installing the .rpm packages*.
+Instructions on installing MongoDB for can be found [here](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/). Warning, these instructions change frequently, so rather than us documenting it here it is best to use their installation commands. Just follow the instructions for *installing the .rpm packages*.
 
 **Start MongoDB.** 
 
@@ -121,6 +121,8 @@ exit
 then
 
 ```
+sudo mkdir -p /etc/nginx/sites-available
+
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.old
 
 sudo cp /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/default
@@ -228,9 +230,13 @@ sudo git clone -b dev_build https://github.com/redbox-mint/redbox-portal.git
 If you have QCIF custom build files (or your own), they can be overlayed now.
 
 **Populate the dependencies**
+Running yarn with centos' default gcc may fail compilation, so upgrade the vm's related libraries first.
 
 ```
 cd /opt/redbox-portal
+sudo yum install centos-release-scl
+sudo yum install devtoolset-6-gcc*
+scl enable devtoolset-6 bash
 
 sudo yarn
 ```
