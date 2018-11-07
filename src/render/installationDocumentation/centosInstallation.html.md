@@ -59,6 +59,15 @@ sudo service mongod start
 
 Verify that the mongod process has started successfully by checking the contents of the log file at /var/log/mongodb/mongod.log for a line reading: [initandlisten] waiting for connections on port 27017
 
+**Check/update MongoDB bind address**
+
+While generally, the redboxportal may use redbox API to communicate with mongodb, upon startup, the frontend portal will attempt to communicate with the mongodb server.
+If the mongodb exists at another vm/ip, you may need to change mongo's bind address from 127.0.0.1 (default) to 0.0.0.0 (all) or the specific ip.
+MongoError: failed to connect to server [localhost:27017] on first connect
+On your mongodb vm/container, edit /etc/mongod.conf and edit ```net:bindIp```. Then reload/restart mongodb.
+
+
+
 ## Install nginx 
 
 Additional information on installing the NGINX web server can be found [here](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)
@@ -255,6 +264,14 @@ node configureInstall.js
 
 When the configuration script asks you which apikey to use, let it default as it will generate the apikey and place it both into the ReDBox Storage * /opt/redbox/data/security/apiKeys.json*  and RedBox-Portal * /opt/redbox-portal/ecosystem.json *
 When the configuration script asks you which URL the application will be accessed from, enter the IP address of the server you are installing to or URL assigned.
+
+**Update 'ecosystem.json'** 
+
+Once the redbox configuration script completes (there might be an error about the apikey...ignore for now), it should generate/update the ecosystem.json. To this file, update "env" with redbox url and mongodb url:
+```
+ "sails_record__baseUrl_redbox": "http://<redbox_backend_ip>:9000/redbox",
+ "sails__datastores_mongodb_url": "mongodb://<mongodb_ip>:27017/redbox-portal",
+```
 
 **Restart ReDBox Storage**
 
