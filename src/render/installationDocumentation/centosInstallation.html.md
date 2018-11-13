@@ -283,6 +283,20 @@ cd /opt/redbox/server/
  
 (check logs)
 
+**Running without docker**
+There are some setups which, because of the unique way you may have setup networks between the moving parts (e.g., separting frontend, backend and database),
+which require that you check configuration items:
+
+*config/env/development.js*
+
+If you are running, in this case a development version, of your app, ensure that you have configured the relevant urls, aaf (if relevant), and apikeys in this file
+
+Also ensure, that your ecosystem.json, if it contains the app url, also points to your host URL.
+
+Your nginx config may need to update server name as well.
+
+If serving through nginx, consider changing redbox backend jetty context to '/'.
+
 **Start ReDBox Portal**
 
 ```
